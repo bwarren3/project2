@@ -7,9 +7,10 @@ module.exports = function (config) {
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
-      require('karma-chrome-launcher'),
-      require('karma-jasmine-html-reporter'),
-      require('karma-coverage-istanbul-reporter'),
+      require('karma-firefox-launcher'),
+      require('karma-jasmine-html-spec'),
+      require('karma-coverage-istanbul-spec'),
+      require('karma-spec-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
@@ -24,9 +25,15 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false,
+    autoWatch: false,
+    browsers: ['FirefoxHeadless'],
+customLaunchers: {
+  'FirefoxHeadless': {
+    base: 'Firefox',
+    flags: [ '-headless', ],
+  }
+},
+    singleRun: true,
     restartOnFileChange: true
   });
 };
